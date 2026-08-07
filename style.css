@@ -231,6 +231,7 @@ p {
     border-radius: 3px;
     margin-bottom: 8px;
     cursor: pointer;
+    position: relative;
 }
 
 .progress {
