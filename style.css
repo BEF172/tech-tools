@@ -213,131 +213,7 @@ p {
     margin: 8px 0;
 }
 
-.now-playing {
-    color: #00ff00;
-    margin-top: 12px;
-}
-
-.track-title {
-    color: #ffff00;
-    font-size: 16px;
-    margin: 4px 0 8px 0;
-}
-
-.time-display {
-    color: #00ff00;
-    font-family: 'Consolas', monospace;
-    font-size: 12px;
-    min-width: 40px;
-    text-align: center;
-}
-
-.seek-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 6px;
-    background: #1a3a6a;
-    border-radius: 3px;
-    outline: none;
-    cursor: pointer;
-    flex: 1;
-    accent-color: #00ff00;
-}
-
-.seek-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #00ff00;
-    cursor: pointer;
-}
-
-.seek-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: #00ff00;
-    cursor: pointer;
-    border: none;
-}
-
-.controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-    flex-wrap: wrap;
-}
-
-.seek-row {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.ctrl-btn {
-    background: transparent;
-    border: 1px solid #4a8ccc;
-    color: #eeedf0;
-    font-size: 16px;
-    padding: 4px 10px;
-    cursor: pointer;
-    border-radius: 3px;
-}
-
-.ctrl-btn:hover {
-    background-color: #1a3a6a;
-}
-
-.ctrl-btn.active {
-    background-color: #00ff00;
-    color: #012456;
-    border-color: #00ff00;
-}
-
-.volume-label {
-    margin-left: 12px;
-}
-
-.volume-slider {
-    width: 80px;
-    accent-color: #00ff00;
-}
-
-.queue-title {
-    color: #56d4dd;
-    margin-bottom: 4px;
-}
-
-.queue-item {
-    color: #eeedf0;
-    padding: 2px 0;
-    cursor: pointer;
-}
-
-.queue-item:hover {
-    color: #ffff00;
-}
-
-.queue-item.active {
-    color: #00ff00;
-}
-
-.error-text {
-    color: #ff0000;
-}
-
-.success-text {
-    color: #00ff00;
-}
-
-.info-text {
-    color: #56d4dd;
-}
+/* Player UI styles are under .player-ui selector */
 
 #player {
     width: 0 !important;
@@ -360,12 +236,177 @@ p {
 }
 
 .player-ui {
-    text-align: center;
-    padding: 10px;
-    background: #0a0a0a;
-    border: 1px solid #00ff41;
-    border-radius: 5px;
+    text-align: left;
+    padding: 12px 14px;
+    background: #012456;
+    border: 1px solid #4a8ccc;
+    border-radius: 0;
     margin: 10px 0;
+    font-family: 'Consolas', monospace;
+    color: #eeedf0;
+    font-size: 14px;
+}
+
+.player-ui .now-playing {
+    color: #eeedf0;
+    margin: 0 0 2px 0;
+    font-size: 14px;
+}
+
+.player-ui .track-title {
+    color: #ffff00;
+    font-size: 14px;
+    margin: 0 0 12px 0;
+    word-break: break-all;
+}
+
+.player-ui .time-display {
+    color: #eeedf0;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    min-width: 36px;
+    text-align: center;
+}
+
+.player-ui .seek-slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 3px;
+    background: #4a8ccc;
+    border-radius: 0;
+    outline: none;
+    cursor: pointer;
+    flex: 1;
+    accent-color: #00ff00;
+}
+
+.player-ui .seek-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 14px;
+    border-radius: 0;
+    background: #00ff00;
+    cursor: pointer;
+}
+
+.player-ui .seek-slider::-moz-range-thumb {
+    width: 8px;
+    height: 14px;
+    border-radius: 0;
+    background: #00ff00;
+    cursor: pointer;
+    border: none;
+}
+
+.player-ui .controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 0;
+    flex-wrap: wrap;
+}
+
+.player-ui .seek-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+.player-ui .ctrl-btn {
+    background: #012456;
+    border: 1px solid #4a8ccc;
+    color: #eeedf0;
+    font-size: 14px;
+    font-family: 'Consolas', monospace;
+    padding: 4px 10px;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.15s;
+}
+
+.player-ui .ctrl-btn:hover {
+    background-color: #4a8ccc;
+    color: #fff;
+}
+
+.player-ui .ctrl-btn.active {
+    background-color: #00ff00;
+    color: #012456;
+    border-color: #00ff00;
+}
+
+.player-ui .volume-label {
+    color: #eeedf0;
+    margin-left: 8px;
+    font-family: 'Consolas', monospace;
+}
+
+.player-ui .volume-slider {
+    width: 80px;
+    accent-color: #00ff00;
+    background: #4a8ccc;
+    border-radius: 0;
+    height: 3px;
+    -webkit-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+.player-ui .volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 8px;
+    height: 14px;
+    border-radius: 0;
+    background: #00ff00;
+    cursor: pointer;
+}
+
+.player-ui .volume-slider::-moz-range-thumb {
+    width: 8px;
+    height: 14px;
+    border-radius: 0;
+    background: #00ff00;
+    cursor: pointer;
+    border: none;
+}
+
+.player-ui .queue-title {
+    color: #56d4dd;
+    margin-bottom: 4px;
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.player-ui .queue-item {
+    color: #eeedf0;
+    padding: 2px 0;
+    cursor: pointer;
+    font-family: 'Consolas', monospace;
+    font-size: 13px;
+}
+
+.player-ui .queue-item:hover {
+    color: #ffff00;
+}
+
+.player-ui .queue-item.active {
+    color: #00ff00;
+}
+
+.player-ui .error-text {
+    color: #ff0000;
+}
+
+.player-ui .success-text {
+    color: #00ff00;
+}
+
+.player-ui .info-text {
+    color: #56d4dd;
 }
 
 @media (max-width: 600px) {

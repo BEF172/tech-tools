@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POWERSHELL - Windows Tools</title>
-    <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="style.css?v=6">
     <style>
         #player {
             width: 0 !important;
@@ -183,7 +183,7 @@
             </div>
             <div id="output"></div>
             <div class="player-ui" id="playerUI" style="display:none;">
-                <p class="now-playing">▶ Now Playing:</p>
+                <p class="now-playing"><span class="prompt" style="color:#eeedf0;">PS C:\Users\Administrator&gt;</span> <span class="command" style="color:#eeedf0;">Now Playing</span></p>
                 <p class="track-title" id="trackTitle">---</p>
                 <div class="seek-row">
                     <span class="time-display" id="currentTime">0:00</span>
@@ -201,7 +201,7 @@
                 </div>
             </div>
             <div class="queue-section" id="queueSection" style="display:none;">
-                <p class="queue-title">📜 Queue:</p>
+                <p class="queue-title"><span class="prompt" style="color:#eeedf0;">PS C:\Users\Administrator&gt;</span> <span class="command" style="color:#eeedf0;">Queue</span></p>
                 <div id="queueList"></div>
             </div>
             <div class="input-wrapper">
