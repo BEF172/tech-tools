@@ -57,44 +57,48 @@ window.onYTStateChange = function(event) {
 };
 
 function updateProgress() {
-    if (player && window._ytPlayerReady) {
+    if (window.player && window._ytPlayerReady) {
         try {
-            const dur = player.getDuration();
+            var dur = window.player.getDuration();
+            var cur = window.player.getCurrentTime();
             if (dur > 0) {
-                const pct = (player.getCurrentTime() / dur) * 100;
-                document.getElementById("progress").style.width = pct + "%";
+                var slider = document.getElementById("seekSlider");
+                var ct = document.getElementById("currentTime");
+                var durEl = document.getElementById("duration");
+                if (slider && !slider.dragging) {
+                    slider.value = (cur / dur) * 100;
+                }
+                if (ct) ct.textContent = formatTime(cur);
+                if (durEl) durEl.textContent = formatTime(dur);
             }
         } catch(e) {}
     }
     if (isPlaying) requestAnimationFrame(updateProgress);
 }
 
-document.addEventListener("click", function(e) {
-    var bar = e.target.closest(".progress-bar");
-    if (!bar) return;
-    var p = window.player;
-    if (!p || !window._ytPlayerReady) return;
-    var rect = bar.getBoundingClientRect();
-    var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    var dur = p.getDuration();
-    if (dur > 0) {
-        p.seekTo(pct * dur, true);
-    }
-});
+function formatTime(s) {
+    var m = Math.floor(s / 60);
+    var sec = Math.floor(s % 60);
+    return m + ":" + (sec < 10 ? "0" : "") + sec;
+}
 
-document.addEventListener("mousemove", function(e) {
-    if (e.buttons !== 1) return;
-    var bar = e.target.closest(".progress-bar");
-    if (!bar) return;
-    var p = window.player;
-    if (!p || !window._ytPlayerReady) return;
-    var rect = bar.getBoundingClientRect();
-    var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-    var dur = p.getDuration();
-    if (dur > 0) {
-        p.seekTo(pct * dur, true);
-    }
-});
+(function() {
+    var slider = document.getElementById("seekSlider");
+    if (!slider) return;
+    slider.dragging = false;
+    slider.addEventListener("input", function() {
+        slider.dragging = true;
+    });
+    slider.addEventListener("change", function() {
+        var p = window.player;
+        if (!p || !window._ytPlayerReady) { slider.dragging = false; return; }
+        var dur = p.getDuration();
+        if (dur > 0) {
+            p.seekTo((slider.value / 100) * dur, true);
+        }
+        slider.dragging = false;
+    });
+})();
 
 function extractVideoId(url) {
     const patterns = [

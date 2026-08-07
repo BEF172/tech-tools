@@ -185,8 +185,10 @@
             <div class="player-ui" id="playerUI" style="display:none;">
                 <p class="now-playing">▶ Now Playing:</p>
                 <p class="track-title" id="trackTitle">---</p>
-                <div class="progress-bar">
-                    <div class="progress" id="progress"></div>
+                <div class="seek-row">
+                    <span class="time-display" id="currentTime">0:00</span>
+                    <input type="range" id="seekSlider" min="0" max="100" value="0" class="seek-slider">
+                    <span class="time-display" id="duration">0:00</span>
                 </div>
                 <div class="controls">
                     <button class="ctrl-btn" id="prevBtn">⏮</button>
