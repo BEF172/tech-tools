@@ -71,18 +71,29 @@ function updateProgress() {
 
 (function() {
     var bar = document.querySelector(".progress-bar");
-    if (bar) {
-        bar.style.cursor = "pointer";
-        bar.addEventListener("click", function(e) {
-            if (!player || !window._ytPlayerReady) return;
-            var rect = bar.getBoundingClientRect();
-            var pct = (e.clientX - rect.left) / rect.width;
-            var dur = player.getDuration();
-            if (dur > 0) {
-                player.seekTo(pct * dur, true);
-            }
-        });
-    }
+    if (!bar) return;
+    bar.style.cursor = "pointer";
+    bar.addEventListener("click", function(e) {
+        var p = window.player;
+        if (!p || !window._ytPlayerReady) return;
+        var rect = bar.getBoundingClientRect();
+        var pct = (e.clientX - rect.left) / rect.width;
+        var dur = p.getDuration();
+        if (dur > 0) {
+            p.seekTo(pct * dur, true);
+        }
+    });
+    bar.addEventListener("mousemove", function(e) {
+        if (e.buttons !== 1) return;
+        var p = window.player;
+        if (!p || !window._ytPlayerReady) return;
+        var rect = bar.getBoundingClientRect();
+        var pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+        var dur = p.getDuration();
+        if (dur > 0) {
+            p.seekTo(pct * dur, true);
+        }
+    });
 })();
 
 function extractVideoId(url) {
