@@ -307,16 +307,6 @@ p {
     color: #56d4dd;
 }
 
-#ytPlayerWrapper {
-    display: none !important;
-}
-
-#ytPlayer, #ytPlayer iframe {
-    display: none !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
 .player-ui {
     text-align: center;
     padding: 10px;
