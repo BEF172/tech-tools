@@ -53,6 +53,14 @@ function doCreatePlayer(callback) {
     ytDiv.id = "ytPlayer";
     wrapper.appendChild(ytDiv);
 
+    var observer = new MutationObserver(function() {
+        var iframes = wrapper.querySelectorAll("iframe");
+        iframes.forEach(function(f) {
+            f.style.cssText = "display:none !important;width:0 !important;height:0 !important;position:absolute !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;";
+        });
+    });
+    observer.observe(wrapper, { childList: true, subtree: true, attributes: true });
+
     player = new YT.Player(ytDiv, {
         height: "0",
         width: "0",
@@ -68,12 +76,7 @@ function doCreatePlayer(callback) {
                 playerReady = true;
                 try {
                     var iframe = player.getIframe();
-                    iframe.style.width = "0";
-                    iframe.style.height = "0";
-                    iframe.style.opacity = "0";
-                    iframe.style.visibility = "hidden";
-                    iframe.style.pointerEvents = "none";
-                    iframe.style.position = "absolute";
+                    iframe.style.cssText = "display:none !important;width:0 !important;height:0 !important;position:absolute !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;";
                 } catch(e) {}
                 callback();
             },
