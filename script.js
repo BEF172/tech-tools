@@ -54,11 +54,11 @@ function doCreatePlayer(callback) {
     wrapper.appendChild(ytDiv);
 
     player = new YT.Player(ytDiv, {
-        height: "225",
-        width: "400",
+        height: "0",
+        width: "0",
         playerVars: {
             autoplay: 0,
-            controls: 1,
+            controls: 0,
             modestbranding: 1,
             rel: 0,
             enablejsapi: 1
@@ -66,6 +66,15 @@ function doCreatePlayer(callback) {
         events: {
             onReady: function() {
                 playerReady = true;
+                try {
+                    var iframe = player.getIframe();
+                    iframe.style.width = "0";
+                    iframe.style.height = "0";
+                    iframe.style.opacity = "0";
+                    iframe.style.visibility = "hidden";
+                    iframe.style.pointerEvents = "none";
+                    iframe.style.position = "absolute";
+                } catch(e) {}
                 callback();
             },
             onStateChange: function(event) {
