@@ -94,7 +94,7 @@ function playVideoById(id, title) {
         return;
     }
     player.loadVideoById(id);
-    document.getElementById("ytPlayer").style.display = "block";
+    document.getElementById("ytPlayerWrapper").style.display = "block";
     document.getElementById("playerUI").style.display = "block";
     document.getElementById("trackTitle").textContent = title || id;
     print("▶ Reproduciendo: " + (title || id), "success-text");
@@ -229,6 +229,8 @@ function handleCommand(cmd) {
         if (player && playerReady) player.stopVideo();
         isPlaying = false;
         document.getElementById("playBtn").textContent = "▶";
+        document.getElementById("ytPlayerWrapper").style.display = "none";
+        document.getElementById("playerUI").style.display = "none";
     }
     else if (command === "next") {
         playNext();
