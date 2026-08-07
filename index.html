@@ -172,7 +172,7 @@
                 <p class="disclaimer">Esta página es un proyecto personal con fines educativos. No es una terminal real, no está afiliada a Microsoft y no apoyamos la piratería.</p>
             </div>
             <div id="output"></div>
-            <div class="yt-embed" id="ytPlayer"></div>
+            <div id="ytPlayer"></div>
             <div class="player-ui" id="playerUI" style="display:none;">
                 <p class="now-playing">▶ Now Playing:</p>
                 <p class="track-title" id="trackTitle">---</p>
@@ -202,6 +202,41 @@
             </div>
         </div>
     </div>
+    <script>
+        var player;
+        var playerReady = false;
+
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player("ytPlayer", {
+                height: "225",
+                width: "400",
+                playerVars: {
+                    autoplay: 0,
+                    controls: 1,
+                    modestbranding: 1,
+                    rel: 0,
+                    enablejsapi: 1
+                },
+                events: {
+                    onReady: function() {
+                        playerReady = true;
+                        document.getElementById("ytPlayer").style.display = "block";
+                        console.log("YouTube Player Ready");
+                    },
+                    onStateChange: function(event) {
+                        if (typeof window.onYTStateChange === "function") {
+                            window.onYTStateChange(event);
+                        }
+                    }
+                }
+            });
+        }
+
+        var tag = document.createElement("script");
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName("script")[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    </script>
     <script src="script.js"></script>
 
 </body>

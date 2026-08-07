@@ -21,58 +21,31 @@ const tools = {
 
 const commands = ["music", "add", "play", "pause", "stop", "next", "prev", "shuffle", "loop", "queue", "clear", "volume", "help"];
 
-let player = null;
-let playerReady = false;
 let queue = [];
 let currentIndex = -1;
 let isPlaying = false;
 let shuffleOn = false;
 let loopOn = false;
 
-// Load YouTube IFrame API dynamically
-var tag = document.createElement("script");
-tag.src = "https://www.youtube.com/iframe_api";
-var firstScriptTag = document.getElementsByTagName("script")[0];
-firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-function onYouTubeIframeAPIReady() {
-    player = new YT.Player("ytPlayer", {
-        height: "100%",
-        width: "100%",
-        playerVars: {
-            autoplay: 1,
-            controls: 1,
-            modestbranding: 1,
-            rel: 0,
-            enablejsapi: 1,
-            origin: window.location.origin
-        },
-        events: {
-            onReady: function() {
-                playerReady = true;
-            },
-            onStateChange: function(event) {
-                if (event.data === YT.PlayerState.ENDED) {
-                    if (loopOn) {
-                        player.seekTo(0);
-                        player.playVideo();
-                    } else {
-                        playNext();
-                    }
-                }
-                if (event.data === YT.PlayerState.PLAYING) {
-                    isPlaying = true;
-                    document.getElementById("playBtn").textContent = "⏸";
-                    updateProgress();
-                }
-                if (event.data === YT.PlayerState.PAUSED) {
-                    isPlaying = false;
-                    document.getElementById("playBtn").textContent = "▶";
-                }
-            }
+window.onYTStateChange = function(event) {
+    if (event.data === YT.PlayerState.ENDED) {
+        if (loopOn) {
+            player.seekTo(0);
+            player.playVideo();
+        } else {
+            playNext();
         }
-    });
-}
+    }
+    if (event.data === YT.PlayerState.PLAYING) {
+        isPlaying = true;
+        document.getElementById("playBtn").textContent = "⏸";
+        updateProgress();
+    }
+    if (event.data === YT.PlayerState.PAUSED) {
+        isPlaying = false;
+        document.getElementById("playBtn").textContent = "▶";
+    }
+};
 
 function updateProgress() {
     if (player && playerReady) {
@@ -121,6 +94,7 @@ function playVideoById(id, title) {
         return;
     }
     player.loadVideoById(id);
+    document.getElementById("ytPlayer").style.display = "block";
     document.getElementById("playerUI").style.display = "block";
     document.getElementById("trackTitle").textContent = title || id;
     print("▶ Reproduciendo: " + (title || id), "success-text");
