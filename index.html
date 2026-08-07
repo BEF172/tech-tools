@@ -5,20 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POWERSHELL - Windows Tools</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
     <style>
-        #player, #player iframe {
+        #player {
             width: 0 !important;
             height: 0 !important;
-            overflow: hidden !important;
-            position: absolute !important;
-            left: -9999px !important;
-            top: -9999px !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
+            pointer-events: none;
+            opacity: 0;
+            position: absolute;
+            left: -9999px;
         }
     </style>
-    <script src="https://www.youtube.com/iframe_api"></script>
 </head>
 
 <body>
@@ -217,17 +214,13 @@
     <div id="player"></div>
     <script src="script.js"></script>
     <script>
-        var player;
-        var _hideInterval = setInterval(function() {
-            var el = document.getElementById("player");
-            if (el) {
-                el.style.cssText = "width:0!important;height:0!important;overflow:hidden!important;position:absolute!important;left:-9999px!important;top:-9999px!important;opacity:0!important;pointer-events:none!important;";
-                var iframes = el.querySelectorAll("iframe");
-                for (var i = 0; i < iframes.length; i++) {
-                    iframes[i].style.cssText = "width:0!important;height:0!important;overflow:hidden!important;position:absolute!important;left:-9999px!important;top:-9999px!important;opacity:0!important;pointer-events:none!important;";
-                }
-            }
-        }, 100);
+        // Load YouTube IFrame API exactly like the working project
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        let player;
 
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
@@ -255,6 +248,7 @@
                 }
             });
         }
+        window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
     </script>
 
 </body>
