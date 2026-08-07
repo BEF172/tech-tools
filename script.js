@@ -26,6 +26,51 @@ let currentIndex = -1;
 let isPlaying = false;
 let shuffleOn = false;
 let loopOn = false;
+let player = null;
+let playerReady = false;
+
+function createPlayer(callback) {
+    if (player && playerReady) {
+        callback();
+        return;
+    }
+    if (!ytAPIReady) {
+        print("Cargando API de YouTube...", "info-text");
+        var check = setInterval(function() {
+            if (ytAPIReady) {
+                clearInterval(check);
+                doCreatePlayer(callback);
+            }
+        }, 100);
+        return;
+    }
+    doCreatePlayer(callback);
+}
+
+function doCreatePlayer(callback) {
+    player = new YT.Player("ytPlayer", {
+        height: "225",
+        width: "400",
+        playerVars: {
+            autoplay: 0,
+            controls: 1,
+            modestbranding: 1,
+            rel: 0,
+            enablejsapi: 1
+        },
+        events: {
+            onReady: function() {
+                playerReady = true;
+                callback();
+            },
+            onStateChange: function(event) {
+                if (typeof window.onYTStateChange === "function") {
+                    window.onYTStateChange(event);
+                }
+            }
+        }
+    });
+}
 
 window.onYTStateChange = function(event) {
     if (event.data === YT.PlayerState.ENDED) {
@@ -89,15 +134,13 @@ function print(text, cls = "") {
 }
 
 function playVideoById(id, title) {
-    if (!player || !playerReady) {
-        print("Esperá a que el player se cargue...", "info-text");
-        return;
-    }
-    player.loadVideoById(id);
-    document.getElementById("ytPlayerWrapper").style.display = "block";
-    document.getElementById("playerUI").style.display = "block";
-    document.getElementById("trackTitle").textContent = title || id;
-    print("▶ Reproduciendo: " + (title || id), "success-text");
+    createPlayer(function() {
+        player.loadVideoById(id);
+        document.getElementById("ytPlayerWrapper").style.display = "block";
+        document.getElementById("playerUI").style.display = "block";
+        document.getElementById("trackTitle").textContent = title || id;
+        print("▶ Reproduciendo: " + (title || id), "success-text");
+    });
 }
 
 function playNext() {
