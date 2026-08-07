@@ -48,7 +48,12 @@ function createPlayer(callback) {
 }
 
 function doCreatePlayer(callback) {
-    player = new YT.Player("ytPlayer", {
+    var wrapper = document.getElementById("ytPlayerWrapper");
+    var ytDiv = document.createElement("div");
+    ytDiv.id = "ytPlayer";
+    wrapper.appendChild(ytDiv);
+
+    player = new YT.Player(ytDiv, {
         height: "225",
         width: "400",
         playerVars: {
@@ -136,7 +141,6 @@ function print(text, cls = "") {
 function playVideoById(id, title) {
     createPlayer(function() {
         player.loadVideoById(id);
-        document.getElementById("ytPlayerWrapper").style.display = "block";
         document.getElementById("playerUI").style.display = "block";
         document.getElementById("trackTitle").textContent = title || id;
         print("▶ Reproduciendo: " + (title || id), "success-text");
@@ -272,7 +276,6 @@ function handleCommand(cmd) {
         if (player && playerReady) player.stopVideo();
         isPlaying = false;
         document.getElementById("playBtn").textContent = "▶";
-        document.getElementById("ytPlayerWrapper").style.display = "none";
         document.getElementById("playerUI").style.display = "none";
     }
     else if (command === "next") {
