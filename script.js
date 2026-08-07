@@ -128,12 +128,32 @@ function print(text, cls = "") {
     scrollToBottom();
 }
 
+function fetchTitle(videoId) {
+    return new Promise(function(resolve) {
+        fetch("https://www.youtube.com/oembed?url=https://www.youtube.com/watch?v=" + videoId + "&format=json")
+            .then(function(r) { return r.json(); })
+            .then(function(data) { resolve(data.title || videoId); })
+            .catch(function() { resolve(videoId); });
+    });
+}
+
 function playVideoById(id, title) {
     waitForPlayer(function() {
         player.loadVideoById(id);
         document.getElementById("playerUI").style.display = "block";
-        document.getElementById("trackTitle").textContent = title || id;
-        print("▶ Reproduciendo: " + (title || id), "success-text");
+        if (title && title !== id) {
+            document.getElementById("trackTitle").textContent = title;
+            print("▶ Reproduciendo: " + title, "success-text");
+        } else {
+            document.getElementById("trackTitle").textContent = "Cargando...";
+            fetchTitle(id).then(function(realTitle) {
+                document.getElementById("trackTitle").textContent = realTitle;
+                var track = queue[currentIndex];
+                if (track) track.title = realTitle;
+                updateQueue();
+            });
+            print("▶ Reproduciendo: " + id, "success-text");
+        }
     });
 }
 
@@ -166,8 +186,14 @@ function playPrev() {
 }
 
 function addToQueue(id, title) {
-    queue.push({ id, title: title || id });
+    queue.push({ id: id, title: title || id });
     print("Agregado a la cola: " + (title || id), "info-text");
+    if (!title || title === id) {
+        fetchTitle(id).then(function(realTitle) {
+            queue[queue.length - 1].title = realTitle;
+            updateQueue();
+        });
+    }
     updateQueue();
 }
 
@@ -231,7 +257,9 @@ function handleCommand(cmd) {
             if (videoId) {
                 queue = [];
                 currentIndex = -1;
-                playVideoById(videoId, videoId);
+                fetchTitle(videoId).then(function(title) {
+                    playVideoById(videoId, title);
+                });
             } else {
                 print("URL no válida de YouTube.", "error-text");
             }
@@ -244,7 +272,9 @@ function handleCommand(cmd) {
         if (urlMatch) {
             const videoId = extractVideoId(urlMatch[0]);
             if (videoId) {
-                addToQueue(videoId, videoId);
+                fetchTitle(videoId).then(function(title) {
+                    addToQueue(videoId, title);
+                });
             } else {
                 print("URL no válida de YouTube.", "error-text");
             }
