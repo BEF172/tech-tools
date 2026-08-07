@@ -10,11 +10,12 @@
         #player, #player iframe {
             width: 0 !important;
             height: 0 !important;
-            pointer-events: none;
-            opacity: 0;
-            position: absolute;
-            left: -9999px;
-            overflow: hidden;
+            overflow: hidden !important;
+            position: absolute !important;
+            left: -9999px !important;
+            top: -9999px !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
         }
     </style>
     <script src="https://www.youtube.com/iframe_api"></script>
@@ -217,6 +218,17 @@
     <script src="script.js"></script>
     <script>
         var player;
+        var _hideInterval = setInterval(function() {
+            var el = document.getElementById("player");
+            if (el) {
+                el.style.cssText = "width:0!important;height:0!important;overflow:hidden!important;position:absolute!important;left:-9999px!important;top:-9999px!important;opacity:0!important;pointer-events:none!important;";
+                var iframes = el.querySelectorAll("iframe");
+                for (var i = 0; i < iframes.length; i++) {
+                    iframes[i].style.cssText = "width:0!important;height:0!important;overflow:hidden!important;position:absolute!important;left:-9999px!important;top:-9999px!important;opacity:0!important;pointer-events:none!important;";
+                }
+            }
+        }, 100);
+
         function onYouTubeIframeAPIReady() {
             player = new YT.Player('player', {
                 height: '0',
