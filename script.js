@@ -26,67 +26,14 @@ let currentIndex = -1;
 let isPlaying = false;
 let shuffleOn = false;
 let loopOn = false;
-let player = null;
-let playerReady = false;
 
-function createPlayer(callback) {
-    if (player && playerReady) {
+function waitForPlayer(callback) {
+    if (window._ytPlayerReady) {
         callback();
         return;
     }
-    if (!ytAPIReady) {
-        print("Cargando API de YouTube...", "info-text");
-        var check = setInterval(function() {
-            if (ytAPIReady) {
-                clearInterval(check);
-                doCreatePlayer(callback);
-            }
-        }, 100);
-        return;
-    }
-    doCreatePlayer(callback);
-}
-
-function doCreatePlayer(callback) {
-    var wrapper = document.getElementById("ytPlayerWrapper");
-    var ytDiv = document.createElement("div");
-    ytDiv.id = "ytPlayer";
-    wrapper.appendChild(ytDiv);
-
-    var observer = new MutationObserver(function() {
-        var iframes = wrapper.querySelectorAll("iframe");
-        iframes.forEach(function(f) {
-            f.style.cssText = "display:none !important;width:0 !important;height:0 !important;position:absolute !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;";
-        });
-    });
-    observer.observe(wrapper, { childList: true, subtree: true, attributes: true });
-
-    player = new YT.Player(ytDiv, {
-        height: "0",
-        width: "0",
-        playerVars: {
-            autoplay: 0,
-            controls: 0,
-            modestbranding: 1,
-            rel: 0,
-            enablejsapi: 1
-        },
-        events: {
-            onReady: function() {
-                playerReady = true;
-                try {
-                    var iframe = player.getIframe();
-                    iframe.style.cssText = "display:none !important;width:0 !important;height:0 !important;position:absolute !important;visibility:hidden !important;opacity:0 !important;pointer-events:none !important;";
-                } catch(e) {}
-                callback();
-            },
-            onStateChange: function(event) {
-                if (typeof window.onYTStateChange === "function") {
-                    window.onYTStateChange(event);
-                }
-            }
-        }
-    });
+    print("Cargando YouTube...", "info-text");
+    window._onPlayerReadyCallback = callback;
 }
 
 window.onYTStateChange = function(event) {
@@ -110,7 +57,7 @@ window.onYTStateChange = function(event) {
 };
 
 function updateProgress() {
-    if (player && playerReady) {
+    if (player && window._ytPlayerReady) {
         try {
             const dur = player.getDuration();
             if (dur > 0) {
@@ -151,7 +98,7 @@ function print(text, cls = "") {
 }
 
 function playVideoById(id, title) {
-    createPlayer(function() {
+    waitForPlayer(function() {
         player.loadVideoById(id);
         document.getElementById("playerUI").style.display = "block";
         document.getElementById("trackTitle").textContent = title || id;
@@ -277,15 +224,15 @@ function handleCommand(cmd) {
     else if (command === "play") {
         if (queue.length > 0 && currentIndex === -1) {
             playNext();
-        } else if (player && playerReady) {
+        } else if (player && window._ytPlayerReady) {
             player.playVideo();
         }
     }
     else if (command === "pause") {
-        if (player && playerReady) player.pauseVideo();
+        if (player && window._ytPlayerReady) player.pauseVideo();
     }
     else if (command === "stop") {
-        if (player && playerReady) player.stopVideo();
+        if (player && window._ytPlayerReady) player.stopVideo();
         isPlaying = false;
         document.getElementById("playBtn").textContent = "▶";
         document.getElementById("playerUI").style.display = "none";
@@ -322,7 +269,7 @@ function handleCommand(cmd) {
     else if (command === "volume") {
         const vol = parseInt(args);
         if (!isNaN(vol) && vol >= 0 && vol <= 100) {
-            if (player && playerReady) player.setVolume(vol);
+            if (player && window._ytPlayerReady) player.setVolume(vol);
             document.getElementById("volumeSlider").value = vol;
             print("Volumen: " + vol + "%", "info-text");
         } else {
@@ -336,7 +283,7 @@ function handleCommand(cmd) {
 
 // Controls
 document.getElementById("playBtn").addEventListener("click", () => {
-    if (!player || !playerReady) return;
+    if (!player || !window._ytPlayerReady) return;
     if (isPlaying) {
         player.pauseVideo();
     } else {
@@ -358,7 +305,7 @@ document.getElementById("loopBtn").addEventListener("click", () => {
 });
 
 document.getElementById("volumeSlider").addEventListener("input", (e) => {
-    if (player && playerReady) player.setVolume(e.target.value);
+    if (player && window._ytPlayerReady) player.setVolume(e.target.value);
 });
 
 // Input autocomplete
