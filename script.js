@@ -29,6 +29,12 @@ let isPlaying = false;
 let shuffleOn = false;
 let loopOn = false;
 
+// Load YouTube IFrame API dynamically
+var tag = document.createElement("script");
+tag.src = "https://www.youtube.com/iframe_api";
+var firstScriptTag = document.getElementsByTagName("script")[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player("ytPlayer", {
         height: "100%",
@@ -38,7 +44,8 @@ function onYouTubeIframeAPIReady() {
             controls: 1,
             modestbranding: 1,
             rel: 0,
-            enablejsapi: 1
+            enablejsapi: 1,
+            origin: window.location.origin
         },
         events: {
             onReady: function() {
