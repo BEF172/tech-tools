@@ -69,6 +69,22 @@ function updateProgress() {
     if (isPlaying) requestAnimationFrame(updateProgress);
 }
 
+(function() {
+    var bar = document.querySelector(".progress-bar");
+    if (bar) {
+        bar.style.cursor = "pointer";
+        bar.addEventListener("click", function(e) {
+            if (!player || !window._ytPlayerReady) return;
+            var rect = bar.getBoundingClientRect();
+            var pct = (e.clientX - rect.left) / rect.width;
+            var dur = player.getDuration();
+            if (dur > 0) {
+                player.seekTo(pct * dur, true);
+            }
+        });
+    }
+})();
+
 function extractVideoId(url) {
     const patterns = [
         /(?:youtube\.com\/watch\?.*v=)([a-zA-Z0-9_-]{11})/,
