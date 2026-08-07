@@ -200,7 +200,7 @@
                     <button class="ctrl-btn" id="shuffleBtn">🔀</button>
                     <button class="ctrl-btn" id="loopBtn">🔁</button>
                     <span class="volume-label">🔊</span>
-                    <input type="range" id="volumeSlider" min="0" max="100" value="70" class="volume-slider">
+                    <input type="range" id="volumeSlider" min="0" max="100" value="100" class="volume-slider">
                 </div>
             </div>
             <div class="queue-section" id="queueSection" style="display:none;">
@@ -242,6 +242,7 @@
                 events: {
                     onReady: function() {
                         window._ytPlayerReady = true;
+                        player.setVolume(100);
                         console.log("YouTube Player Ready");
                         if (window._onPlayerReadyCallback) window._onPlayerReadyCallback();
                     },

@@ -19,7 +19,7 @@ const tools = {
     "unigetui": "https://marticliment.com/unigetui/"
 };
 
-const commands = ["music", "add", "play", "pause", "stop", "next", "prev", "shuffle", "loop", "queue", "clear", "volume", "help"];
+const commands = ["music", "add", "play", "pause", "stop", "next", "prev", "shuffle", "loop", "queue", "clear", "cls", "volume", "help"];
 
 let queue = [];
 let currentIndex = -1;
@@ -246,7 +246,7 @@ function handleCommand(cmd) {
         print("  shuffle           - Activa/desactiva aleatorio");
         print("  loop              - Activa/desactiva repetir");
         print("  queue             - Muestra la cola de reproducción");
-        print("  clear             - Limpia la pantalla");
+        print("  clear / cls       - Limpia la pantalla");
         print("  volume [0-100]    - Ajusta el volumen");
         print("  help              - Muestra esta ayuda");
     }
@@ -324,7 +324,7 @@ function handleCommand(cmd) {
             });
         }
     }
-    else if (command === "clear") {
+    else if (command === "clear" || command === "cls") {
         document.getElementById("output").innerHTML = "";
     }
     else if (command === "volume") {

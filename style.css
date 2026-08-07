@@ -452,4 +452,29 @@ p {
     .autocomplete {
         font-size: 12px;
     }
+
+    .player-ui {
+        padding: 10px;
+    }
+
+    .player-ui .controls {
+        gap: 3px;
+    }
+
+    .player-ui .ctrl-btn {
+        padding: 6px 8px;
+        font-size: 14px;
+    }
+
+    .player-ui .volume-slider {
+        width: 60px;
+    }
+
+    .player-ui .volume-label {
+        margin-left: 4px;
+    }
+
+    .player-ui .seek-row {
+        gap: 6px;
+    }
 }
