@@ -16,7 +16,13 @@ const tools = {
     "sysinternals": "https://learn.microsoft.com/en-us/sysinternals/downloads/",
     "parkcontrol": "https://bitsum.com/parkcontrol/",
     "islc": "https://www.wagnardsoft.com/forums/viewtopic.php?t=12009",
-    "unigetui": "https://marticliment.com/unigetui/"
+    "unigetui": "https://marticliment.com/unigetui/",
+    "hirens": "https://www.hirensbootcd.org/",
+    "medicat": "https://medicatusb.com/",
+    "ventoy": "https://www.ventoy.net/",
+    "rufus": "https://rufus.ie/",
+    "parkcontrol": "https://bitsum.com/parkcontrol/",
+    "islc": "https://www.wagnardsoft.com/forums/viewtopic.php?t=12009"
 };
 
 const commands = ["music", "add", "play", "pause", "stop", "next", "prev", "shuffle", "loop", "queue", "clear", "cls", "volume", "help"];
