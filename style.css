@@ -1,7 +1,3 @@
-/* ============================================
-   POWERSHELL THEME - COLORES
-   Cambia estos valores para personalizar
-   ============================================ */
 
 :root {
     /* Fondo */
@@ -31,9 +27,6 @@
     --scrollbar-track: #012456;
 }
 
-/* ============================================
-   RESET
-   ============================================ */
 
 * {
     margin: 0;
@@ -155,7 +148,7 @@ p {
 }
 
 .prompt-line {
-    margin-bottom: 12px;
+    margin-bottom: 8px;
 }
 
 .prompt {
@@ -217,8 +210,13 @@ p {
 
 .section-header {
     text-align: center;
-    margin: 8px 0 12px 0;
-    padding: 6px 0;
+    margin: 14px 0 18px 0;
+    padding: 0;
+}
+
+.separator {
+    border-top: 2px solid var(--accent-green);
+    margin: 0;
 }
 
 .section-bar {
@@ -226,14 +224,16 @@ p {
 }
 
 .section-title {
-    color: var(--text-primary);
+    color: var(--accent-green);
     font-size: 14px;
+    margin: 12px 0;
 }
 
 .category {
     color: var(--accent-cyan);
     margin-top: 16px;
     margin-bottom: 8px;
+    font-weight: bold;
 }
 
 .tool {
@@ -260,8 +260,8 @@ p {
 }
 
 .end {
-    padding: 8px 0;
-    margin: 10px 0;
+    padding: 16px 0;
+    margin: 20px 0;
 }
 
 /* Player UI styles are under .player-ui selector */
