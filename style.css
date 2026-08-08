@@ -11,7 +11,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    padding: 10px;
+    padding: 20px;
     overflow: hidden;
 }
 
@@ -76,8 +76,8 @@ body {
     padding: 12px;
     color: #eeedf0;
     font-family: 'Consolas', 'Lucida Console', monospace;
-    font-size: 13px;
-    line-height: 1.3;
+    font-size: 14px;
+    line-height: 1.4;
     flex: 1;
     overflow-y: auto;
 }
@@ -101,7 +101,7 @@ p {
 }
 
 .prompt-line {
-    margin-bottom: 6px;
+    margin-bottom: 12px;
 }
 
 .prompt {
@@ -125,7 +125,7 @@ p {
     outline: none;
     color: #ffff00;
     font-family: 'Consolas', 'Lucida Console', monospace;
-    font-size: 13px;
+    font-size: 14px;
     flex: 1;
     caret-color: #eeedf0;
 }
@@ -169,10 +169,10 @@ p {
 
 .section-header {
     text-align: center;
-    margin: 4px 0;
+    margin: 8px 0;
     border-top: 2px solid #00ff00;
     border-bottom: 2px solid #00ff00;
-    padding: 3px 0;
+    padding: 6px 0;
 }
 
 .section-bar {
@@ -186,12 +186,12 @@ p {
 .category {
     color: #56d4dd;
     font-weight: bold;
-    margin-top: 16px;
-    margin-bottom: 2px;
+    margin-top: 30px;
+    margin-bottom: 4px;
 }
 
 .tool {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
 }
 
 .tool-name {
