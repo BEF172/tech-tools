@@ -1,3 +1,40 @@
+/* ============================================
+   POWERSHELL THEME - COLORES
+   Cambia estos valores para personalizar
+   ============================================ */
+
+:root {
+    /* Fondo */
+    --bg-primary: #012456;        /* Fondo principal PowerShell */
+    --bg-dark: #000814;           /* Fondo oscuro del escritorio */
+    --bg-accent: #001d3d;         /* Acento del fondo */
+    --bg-highlight: #0a2a4a;      /* Resaltado hover */
+
+    /* Texto */
+    --text-primary: #ffffff;      /* Texto principal */
+    --text-secondary: #cccccc;    /* Texto secundario */
+    --text-muted: #888888;        /* Texto atenuado */
+
+    /* Acentos */
+    --accent-cyan: #56d4dd;       /* Categorías, info */
+    --accent-yellow: #ffff00;     /* Nombres de herramientas */
+    --accent-blue: #5dadec;       /* Links, bordes */
+    --accent-green: #00ff00;      /* Éxito, acento */
+    --accent-red: #ff6b6b;        /* Errores */
+
+    /* Bordes */
+    --border-light: #4a8ccc;      /* Bordes sutiles */
+    --border-dark: #1a3a5a;       /* Bordes oscuros */
+
+    /* UI */
+    --scrollbar-thumb: #4a8ccc;
+    --scrollbar-track: #012456;
+}
+
+/* ============================================
+   RESET
+   ============================================ */
+
 * {
     margin: 0;
     padding: 0;
@@ -5,13 +42,13 @@
 }
 
 body {
-    background: #000;
+    background: var(--bg-dark);
     background-image: 
         radial-gradient(ellipse at 50% 80%, rgba(0, 80, 180, 0.5) 0%, transparent 60%),
         radial-gradient(ellipse at 30% 60%, rgba(0, 120, 215, 0.3) 0%, transparent 50%),
         radial-gradient(ellipse at 70% 70%, rgba(0, 162, 255, 0.2) 0%, transparent 50%),
         radial-gradient(ellipse at 50% 100%, rgba(0, 60, 140, 0.8) 0%, transparent 50%),
-        linear-gradient(180deg, #000814 0%, #001d3d 40%, #003566 100%);
+        linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-accent) 40%, var(--bg-primary) 100%);
     background-attachment: fixed;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     min-height: 100vh;
@@ -27,8 +64,8 @@ body {
     width: 900px;
     max-width: calc(100vw - 40px);
     height: calc(100vh - 120px);
-    background-color: #012456;
-    border: 1px solid #707070;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-light);
     box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.6);
     border-radius: 8px 8px 0 0;
     overflow: hidden;
@@ -41,8 +78,8 @@ body {
 }
 
 .title-bar {
-    background-color: #ffffff;
-    color: #000000;
+    background-color: var(--text-primary);
+    color: var(--bg-primary);
     padding: 4px 10px;
     display: flex;
     justify-content: space-between;
@@ -65,7 +102,7 @@ body {
 }
 
 .title-icon {
-    color: #012456;
+    color: var(--bg-primary);
     font-weight: bold;
     font-family: 'Consolas', monospace;
 }
@@ -91,7 +128,7 @@ body {
 
 .console-body {
     padding: 12px;
-    color: #eeedf0;
+    color: var(--text-primary);
     font-family: 'Consolas', 'Lucida Console', monospace;
     font-size: 14px;
     line-height: 1.4;
@@ -104,11 +141,11 @@ body {
 }
 
 .console-body::-webkit-scrollbar-track {
-    background: #012456;
+    background: var(--bg-primary);
 }
 
 .console-body::-webkit-scrollbar-thumb {
-    background: #4a8ccc;
+    background: var(--scrollbar-thumb);
     border-radius: 4px;
 }
 
@@ -122,7 +159,7 @@ p {
 }
 
 .prompt {
-    color: #eeedf0;
+    color: var(--text-primary);
 }
 
 .input-wrapper {
@@ -140,11 +177,11 @@ p {
     background: transparent;
     border: none;
     outline: none;
-    color: #ffff00;
+    color: var(--text-primary);
     font-family: 'Consolas', 'Lucida Console', monospace;
     font-size: 14px;
     flex: 1;
-    caret-color: #eeedf0;
+    caret-color: var(--text-primary);
 }
 
 .autocomplete {
@@ -153,8 +190,8 @@ p {
     bottom: 100%;
     left: 0;
     right: 0;
-    background-color: #0a1a3a;
-    border: 1px solid #4a8ccc;
+    background-color: var(--bg-highlight);
+    border: 1px solid var(--border-light);
     max-height: 200px;
     overflow-y: auto;
     z-index: 10;
@@ -163,26 +200,24 @@ p {
 }
 
 .ac-item {
-    padding: 4px 8px;
-    color: #eeedf0;
+    padding: 6px 10px;
+    color: var(--text-secondary);
     cursor: pointer;
 }
 
 .ac-item:hover,
 .ac-item.active {
-    background-color: #1a3a6a;
-    color: #ffff00;
+    background-color: var(--bg-highlight);
+    color: var(--text-primary);
 }
 
 .command {
-    color: #ffff00;
+    color: var(--text-primary);
 }
 
 .section-header {
     text-align: center;
-    margin: 8px 0;
-    border-top: 2px solid #00ff00;
-    border-bottom: 2px solid #00ff00;
+    margin: 8px 0 12px 0;
     padding: 6px 0;
 }
 
@@ -191,44 +226,42 @@ p {
 }
 
 .section-title {
-    color: #00ff00;
+    color: var(--text-primary);
+    font-size: 14px;
 }
 
 .category {
-    color: #56d4dd;
-    font-weight: bold;
-    margin-top: 30px;
-    margin-bottom: 4px;
-}
-
-.tool {
+    color: var(--accent-cyan);
+    margin-top: 16px;
     margin-bottom: 8px;
 }
 
+.tool {
+    margin-bottom: 10px;
+}
+
 .tool-name {
-    color: #ffff00;
+    color: var(--accent-yellow);
 }
 
 .tool-desc {
-    color: #eeedf0;
+    color: var(--text-secondary);
 }
 
 .tool-link {
-    color: #00bfff;
+    color: var(--accent-blue);
 }
 
 .disclaimer {
     text-align: center;
-    color: #cccccc;
+    color: var(--text-muted);
     font-size: 12px;
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Consolas', monospace;
 }
 
 .end {
-    border-top: 2px solid #00ff00;
-    border-bottom: 2px solid #00ff00;
-    padding: 6px 0;
-    margin: 8px 0;
+    padding: 8px 0;
+    margin: 10px 0;
 }
 
 /* Player UI styles are under .player-ui selector */
@@ -255,31 +288,31 @@ p {
 
 .player-ui {
     text-align: left;
-    padding: 12px 14px;
-    background: #012456;
-    border: 1px solid #4a8ccc;
+    padding: 12px;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
     border-radius: 0;
     margin: 10px 0;
     font-family: 'Consolas', monospace;
-    color: #eeedf0;
+    color: var(--text-primary);
     font-size: 14px;
 }
 
 .player-ui .now-playing {
-    color: #eeedf0;
-    margin: 0 0 2px 0;
+    color: var(--text-primary);
+    margin: 0 0 4px 0;
     font-size: 14px;
 }
 
 .player-ui .track-title {
-    color: #ffff00;
+    color: var(--text-primary);
     font-size: 14px;
     margin: 0 0 12px 0;
     word-break: break-all;
 }
 
 .player-ui .time-display {
-    color: #eeedf0;
+    color: var(--text-primary);
     font-family: 'Consolas', monospace;
     font-size: 12px;
     min-width: 36px;
@@ -291,12 +324,12 @@ p {
     appearance: none;
     width: 100%;
     height: 3px;
-    background: #4a8ccc;
+    background: var(--border-light);
     border-radius: 0;
     outline: none;
     cursor: pointer;
     flex: 1;
-    accent-color: #00ff00;
+    accent-color: var(--accent-green);
 }
 
 .player-ui .seek-slider::-webkit-slider-thumb {
@@ -305,7 +338,7 @@ p {
     width: 8px;
     height: 14px;
     border-radius: 0;
-    background: #00ff00;
+    background: var(--accent-green);
     cursor: pointer;
 }
 
@@ -313,7 +346,7 @@ p {
     width: 8px;
     height: 14px;
     border-radius: 0;
-    background: #00ff00;
+    background: var(--accent-green);
     cursor: pointer;
     border: none;
 }
@@ -334,9 +367,9 @@ p {
 }
 
 .player-ui .ctrl-btn {
-    background: #012456;
-    border: 1px solid #4a8ccc;
-    color: #eeedf0;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    color: var(--text-primary);
     font-size: 14px;
     font-family: 'Consolas', monospace;
     padding: 4px 10px;
@@ -346,26 +379,26 @@ p {
 }
 
 .player-ui .ctrl-btn:hover {
-    background-color: #4a8ccc;
-    color: #fff;
+    background-color: var(--border-light);
+    color: var(--text-primary);
 }
 
 .player-ui .ctrl-btn.active {
-    background-color: #00ff00;
-    color: #012456;
-    border-color: #00ff00;
+    background-color: var(--accent-green);
+    color: var(--bg-primary);
+    border-color: var(--accent-green);
 }
 
 .player-ui .volume-label {
-    color: #eeedf0;
+    color: var(--text-primary);
     margin-left: 8px;
     font-family: 'Consolas', monospace;
 }
 
 .player-ui .volume-slider {
     width: 80px;
-    accent-color: #00ff00;
-    background: #4a8ccc;
+    accent-color: var(--accent-green);
+    background: var(--border-light);
     border-radius: 0;
     height: 3px;
     -webkit-appearance: none;
@@ -379,7 +412,7 @@ p {
     width: 8px;
     height: 14px;
     border-radius: 0;
-    background: #00ff00;
+    background: var(--accent-green);
     cursor: pointer;
 }
 
@@ -387,20 +420,20 @@ p {
     width: 8px;
     height: 14px;
     border-radius: 0;
-    background: #00ff00;
+    background: var(--accent-green);
     cursor: pointer;
     border: none;
 }
 
 .player-ui .queue-title {
-    color: #56d4dd;
+    color: var(--accent-cyan);
     margin-bottom: 4px;
     font-family: 'Consolas', monospace;
     font-size: 13px;
 }
 
 .player-ui .queue-item {
-    color: #eeedf0;
+    color: var(--text-primary);
     padding: 2px 0;
     cursor: pointer;
     font-family: 'Consolas', monospace;
@@ -408,23 +441,23 @@ p {
 }
 
 .player-ui .queue-item:hover {
-    color: #ffff00;
+    color: var(--accent-yellow);
 }
 
 .player-ui .queue-item.active {
-    color: #00ff00;
+    color: var(--accent-green);
 }
 
 .player-ui .error-text {
-    color: #ff0000;
+    color: var(--accent-red);
 }
 
 .player-ui .success-text {
-    color: #00ff00;
+    color: var(--accent-green);
 }
 
 .player-ui .info-text {
-    color: #56d4dd;
+    color: var(--accent-cyan);
 }
 
 .taskbar {
@@ -610,7 +643,7 @@ p {
 
     .input-wrapper {
         flex-shrink: 0;
-        border-top: 1px solid #4a8ccc;
+        border-top: 1px solid var(--border-light);
     }
 
     .input-line {
