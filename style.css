@@ -566,87 +566,94 @@ p {
 
 @media (max-width: 600px) {
     body {
-        padding: 10px;
+        padding: 0;
+        overflow: hidden;
     }
+
+    .powershellcontainer {
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 44px !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        transform: none !important;
+        border-radius: 0;
+        resize: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .resize-handle { display: none; }
+
+    .title-bar {
+        font-size: 11px;
+        padding: 3px 8px;
+        cursor: default;
+    }
+
+    .title-bar:active { cursor: default; }
+
+    .console-body {
+        font-size: 12px;
+        padding: 8px;
+        flex: 1;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .terminal-input {
+        font-size: 14px;
+        padding: 4px 0;
+    }
+
+    .tool-desc { font-size: 11px; }
+    .tool-link { font-size: 11px; word-break: break-all; }
+    .disclaimer { font-size: 10px; padding: 0 6px; }
+
+    .player-ui {
+        padding: 8px;
+    }
+
+    .player-ui .controls {
+        gap: 3px;
+        flex-wrap: wrap;
+    }
+
+    .player-ui .ctrl-btn {
+        padding: 8px 10px;
+        font-size: 16px;
+        min-width: 36px;
+        min-height: 36px;
+    }
+
+    .player-ui .volume-slider {
+        width: 50px;
+    }
+
+    .player-ui .volume-label { margin-left: 2px; }
+
+    .player-ui .seek-row { gap: 6px; }
+
+    .player-ui .seek-slider { height: 4px; }
+    .player-ui .time-display { font-size: 11px; min-width: 30px; }
 
     .taskbar {
         height: 44px;
     }
 
     .taskbar-btn {
-        padding: 5px 8px;
+        width: 36px;
+        height: 36px;
     }
 
-    .powershellcontainer {
-        width: 100% !important;
-        height: calc(100vh - 44px) !important;
-        left: 0 !important;
-        top: 0 !important;
-        transform: none !important;
-        border-radius: 0;
-        resize: none;
-    }
+    .taskbar-btn svg { width: 18px; height: 18px; }
+    .taskbar-tray svg { width: 14px; height: 14px; }
 
-    .resize-handle { display: none; }
-
-    body {
-        padding-bottom: 44px;
-    }
-
-    .console-body {
-        font-size: 12px;
-        padding: 8px;
-    }
-
-    .title-bar {
+    .taskbar-clock {
         font-size: 11px;
-    }
-
-    .win-btn {
-        width: 22px;
-        height: 16px;
-        font-size: 12px;
-    }
-
-    .tool-desc {
-        font-size: 11px;
-    }
-
-    .disclaimer {
-        font-size: 10px;
-        padding: 0 8px;
-    }
-
-    .terminal-input {
-        font-size: 12px;
-    }
-
-    .autocomplete {
-        font-size: 12px;
-    }
-
-    .player-ui {
-        padding: 10px;
-    }
-
-    .player-ui .controls {
-        gap: 3px;
-    }
-
-    .player-ui .ctrl-btn {
-        padding: 6px 8px;
-        font-size: 14px;
-    }
-
-    .player-ui .volume-slider {
-        width: 60px;
-    }
-
-    .player-ui .volume-label {
-        margin-left: 4px;
-    }
-
-    .player-ui .seek-row {
-        gap: 6px;
+        padding: 2px 6px;
     }
 }

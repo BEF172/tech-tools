@@ -486,8 +486,9 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 10000);
 
-// Draggable + Resizable window
+// Draggable + Resizable window (desktop only)
 (function() {
+    if (window.innerWidth <= 600) return;
     var win = document.querySelector('.powershellcontainer');
     var titleBar = document.querySelector('.title-bar');
     var isDragging = false, isResizing = false;
